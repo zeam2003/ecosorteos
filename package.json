@@ -1,0 +1,8 @@
+{
+  "name": "Ecosorteos",
+  "version": "1.0.0",
+  "description": "App para Sorteos - Ecosistemas",
+  "main": "index.js",
+  "author": "J. J. Lovardo",
+  "license": "MIT"
+}
