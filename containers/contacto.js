@@ -1,9 +1,29 @@
-import mongoose from "mongoose";
-import config from '../config.js'
 
-await mongoose.connect(config.mongoDB.uri, config.mongoDB.options);
+const { mongoose } = require('mongoose');
+const  config  = require('../config.js');
 
-class ContenedorMongo {
+
+// (async () => {
+//     try {
+//        await mongoose.connect(mongoC.mongoDB.uri, mongoC.mongoDB.options);
+//     } catch (error) {
+//         console.log('No se pudo conectar a la base de datos')
+//     }
+
+    
+
+// })();
+(async () => {
+    try {
+        await mongoose.connect(config.mongoDB.uri, config.mongoDB.options);
+    } catch (error) {
+        throw new Error(error);
+    }
+})();
+
+
+
+ class ContenedorMongo {
 
     // se debe recibir la coleccion y esquema
     constructor(coleccion, esquema) {
@@ -46,4 +66,4 @@ class ContenedorMongo {
 
 }
 
-export default ContenedorMongo;
+module.exports = ContenedorMongo;

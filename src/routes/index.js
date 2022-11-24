@@ -1,5 +1,7 @@
-import Router from 'express';
-import ContenedorMongo from '../../containers/contacto.js';
+
+const { Router } = require('express');
+const  ContenedorMongo  = require('../../containers/contacto.js');
+
 const router = Router();
 
 // (async () => {
@@ -23,9 +25,11 @@ const contactoMongo = new ContenedorMongo('contacts',{
 
 router.get('/', async (req, res) => {
    try {
-    const data = await contactoMongo.findAll();
-    console.log(data)
-    res.send(data)
+    const contacts = await contactoMongo.findAll();
+    //console.log(contacts)
+    //res.render('index', { contacts })
+    //res.send(contacts)
+    res.render('index')
    } catch (error) {
     
    }
@@ -69,4 +73,4 @@ router.get('/', async(req, res) => {
 });
  */
 
-export default router;
+module.exports = router;

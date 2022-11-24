@@ -4,11 +4,12 @@
   "description": "App para Sorteos - Ecosistemas",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon /./src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js "
   },
   "author": "J. J. Lovardo",
   "license": "MIT",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

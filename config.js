@@ -1,6 +1,6 @@
 
 
-export default {
+const config = {
     mongoDB: {
         uri: `mongodb+srv://ecosorteos:Eco.06.2022@cluster0.ltbch2l.mongodb.net/ecosorteos`,
         options: {
@@ -12,3 +12,5 @@ export default {
         }
     }
 }
+
+module.exports = config;
