@@ -1,0 +1,35 @@
+.body{
+    background-color: #F8F9FA;
+}
+
+.navmari{
+    margin: 20px;
+    align-items: center;
+}
+
+.btn{
+    background-color:#2b0847;
+    border-color:#2b0847;
+    
+}
+
+h2{
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    color:#2b0847;
+}
+.suerte{
+    font-size: 30px;
+    color:#5c4864;
+}
+.mucha{
+    margin-top: 40px;
+}
+
+.img-bkg{
+    margin-top: -100px;
+    background-image: url('https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+    backdrop-filter: blur(30px);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

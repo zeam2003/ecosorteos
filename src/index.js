@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(router);
 
-//app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname + '/public')));
 
 app.listen(8080, () => { console.log('Servidor Express corriendo')});
 

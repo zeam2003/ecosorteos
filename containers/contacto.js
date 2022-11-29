@@ -30,8 +30,15 @@ const  config  = require('../config.js');
         this.db = mongoose.model(coleccion, esquema);
     }
 
-    findByid(id) {
-
+   async findByDni(dni) {
+        try {
+            const data = await this.db.find((persona) => persona.dni == dni);
+            if(persona) {
+                return data
+            } 
+        } catch(error) {
+            throw new Error(error)
+        }
     }
 
     async findAll() {
@@ -45,8 +52,9 @@ const  config  = require('../config.js');
 
     async save(newDoc) {
         try {
-          const doc = await this.db.create(newDoc)  
-          return doc;
+            const doc = await this.db.create(newDoc)  
+            console.log('Se creo el documento', doc);
+            return doc
         } catch (error) {
             throw new Error(error);
         }

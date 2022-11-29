@@ -1,63 +1,68 @@
-<div class="col-md-6 offset-md-3">
-    <div class="card bg-white text light">
-        <div class="card-header">
-            <h1 class="h4 text white">Participantes</h1>
-        </div>
-    </div>
-    <div class="card-body">
-        {{#if contacts}}
-        <ul class="list-group">{{#each contacts}}
-            <li class="list-group-item justify-content-between align-items-center">
-                <h3>{{firstname}} {{ lastname}}</h3>
-                <p>{{email}}</p>
-                <p>{{phone}}</p>
-                <a class="btn btn-danger" href="/delete-contact/{{id}}">Borrar</a>
-                <a class="btn btn-secondary" href="/edit-contact/{{id}}">Editar</a>
-            </li>
-            {{/each}}
-        </ul>
-        {{else}}
-         <p>No hay participantes</p>
-        {{/if}}
-        
-    </div>
 
-    <div class="card footer">
-        
+    <!-- Section: Design Block -->
+    <section class="text-center">
+    
+      <!-- Background image -->
+      <div class="p-5 bg-image" style="
+            height:200px;">
+      </div>
 
-        <form action="{{#unless contact.id}}/new-contact{{else}}/update-contact/{{contact.id}} {{/unless}}"  method="POST">
-            <div class="row">
-                <div class="col">
-                    <label for="firstname"></label>
-                    <input type="text" name="firstname" class="form-control mb-2" placeholder="first name" id="firstname" value="{{contact.firstname}}">
+    <!-- Background image -->
+    <div class="card mx-4 mx-md-5 img-bkg">
+      <div class="card-body py-5 px-md-5">
+  
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-5">Eco Sorteos</h2>
+            <form id="loadForm" action="{{#unless contact.id}}/new-contact{{else}}/update-contact/{{contact.id}} {{/unless}}" method="post">
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="firstname" id="firstname" class="form-control" required />
+                    <label class="form-label" for="firstname">Nombre</label>
+                  </div>
                 </div>
-                
-                <div class="col">
-                    <label for="lastname"></label>
-                    <input type="text" name="lastname" class="form-control mb-2" placeholder="last name" id="lastname" value="{{contact.lastname}}">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="lastname" id="lastname" class="form-control" required />
+                    <label class="form-label" for="lastname">Apellido</label>
+                  </div>
                 </div>
-        </div>
-            
-            <div class="row">
-                <div class="col">
-                    <label for="email"></label>
-                    <input type="text" name="email" class="form-control mb-2" placeholder="email" id="email" value="{{contact.email}}">
-                </div>
-                
-                <div class="col">
-                    <label for="phone"></label>
-                    <input type="text" name="phone" class="form-control mb-2" placeholder="phone" id="phone" value="{{contact.phone}}">
-                </div>
+              </div>
+  
+              <!-- Email input -->
+              
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class=" form-outline ">
+                  <input type="email" name="email" id="email" class="form-control" required />
+                  <label class="form-label" for="email">Email</label>
+              </div>
             </div>
-            
-            {{#if contact.id}}
-                <button class="btn btn-primary btn-block">Actualizar</button>
-                <a href="/" class="btn btn-secondary">Cancelar</a>
-                {{else}}
-                <button class="btn btn-primary btn-block">Agregar</button>
-            {{/if}}
-            
-        </form>
-    </div>
+  
+              <!-- Password input -->
+              <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input type="text" name="dni" id="dni" class="form-control" required/>
+                <label class="form-label" for="dni">DNI</label>
+              </div>
+            </div>
+            </div>
+  
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4 " >Registrarse</button>
+  
+              <!-- Register buttons -->
 
-</div>
+            </form>
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-8">
+                <h2 class="fw-bold mb-5 suerte">¡Mucha Suerte!</h2>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+    </section>
