@@ -1,28 +1,83 @@
-<div class="col-md-6 offset-md-3">
-    <div class="card bg-white text light">
-        <div class="card-header">
-            <h1 class="h4 text white">Participantes</h1>
-        </div>
-    </div>
-    <div class="card-body">
-        {{#if contacts}}
-        <ul class="list-group">{{#each contacts}}
-            <li class="list-group-item justify-content-between align-items-center">
-                <h3>{{firstname}} {{ lastname}}</h3>
-                <p>{{email}}</p>
-                <p>{{phone}}</p>
-                <a class="btn btn-danger" href="/delete-contact/{{id}}">Borrar</a>
-                <a class="btn btn-secondary" href="/edit-contact/{{id}}">Editar</a>
-            </li>
-            {{/each}}
-        </ul>
-        {{else}}
-         <p>No hay participantes</p>
-        {{/if}}
-        
-    </div>
+<section class="text-center">
+    
+      <!-- Background image -->
+      <div class="p-5 bg-image" style="
+            height:200px;">
+      </div>
+<!-- Background image -->
+    <div class="card mx-4 mx-md-5 img-bkg">
+        <div class="card-body py-5 px-md-5">
+            <div class="container">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-header">
+                                <h1 class="fw-bold suerte">Participantes</h1>
+                            </div>
+                            <div class="card-body border-end border-secondary" style="--bs-border-opacity: .5;">
+                                {{#if contacts}}
+                                <ul class="list-group" style="overflow-y: scroll; height: 20vh;">{{#each contacts}}
+                                    <li class="list-group-item justify-content-between align-items-center">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">{{firstname}}</div>
+                                            <div class="col-md-4 col-sm-12">{{lastname}}</div>
+                                            <div class="col-6 col-md-2 col-sm-6">
+                                                <a class="btn btn-danger btn-sm" href="/delete-contact/{{id}}">Borrar</a>
+                                            </div>
+                                            <div class="col-6 col-md-2 col-sm-6">
+                                                <a class="btn btn-secondary btn-sm" href="/edit-contact/{{id}}">Editar</a>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                                {{else}}
+                                <p>No hay participantes</p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="card-header">
+                                <h1 class="fw-bold suerte">Sorteados</h1>
+                            </div>  
+                            <div class="card-body border-end border-secondary" style="--bs-border-opacity: .5;">
+                                {{#if querySorteados}}
+                                <ul class="list-group" style="overflow-y: scroll; height: 20vh;">{{#each querySorteados}}
+                                    <li class="list-group-item justify-content-between align-items-center">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">{{firstname}}</div>
+                                            <div class="col-md-6 col-sm-12">{{lastname}}</div>
+                                            
+                                        </div>
+                                        
+                                        
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                                {{else}}
+                                <p>No hay ganadores aún</p>
+                                {{/if}}
+                            </div>
+                            
+                        </div> 
+                    </div>
+                    <a href="/sorteo" class="btn btn-eco btn-primary btn-block mb-4 ">Sorteo</a>
+                     
+                </div>
+            </div>
+         </div> 
 
-    <div class="card footer">
+         <div class="card-body"> {{pepe}} </div>
+    </div>
+    
+</section>
+
+
+
+
+    {{!-- <div class="card footer">
         
 
         <form action="{{#unless contact.id}}/new-contact{{else}}/update-contact/{{contact.id}} {{/unless}}"  method="POST">
@@ -58,6 +113,6 @@
             {{/if}}
             
         </form>
-    </div>
+    </div> --}}
 
 </div>

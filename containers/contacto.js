@@ -50,10 +50,19 @@ const  config  = require('../config.js');
         }
     }
 
+    async findAllSorteados() {
+        try {
+            const data = await this.db.find({});
+            return data;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async save(newDoc) {
         try {
             const doc = await this.db.create(newDoc)  
-            console.log('Se creo el documento', doc);
+            //console.log('Se creo el documento', doc);
             return doc
         } catch (error) {
             throw new Error(error);
@@ -64,8 +73,13 @@ const  config  = require('../config.js');
 
     }
 
-    delete(elem) {
-
+    async deleteByDni(id) {
+        try {
+            const borrar = await this.db.deleteOne({_id: id})
+            return borrar
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     delteAll() {
