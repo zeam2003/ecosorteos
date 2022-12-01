@@ -1,4 +1,3 @@
-
 const { Router } = require('express');
 const  ContenedorMongo  = require('../../containers/contacto.js');
 
@@ -7,18 +6,6 @@ const router = Router();
 let msg = false;
 let busqueda = [];
 let sorteados = [];
-let firstListener = '';
-
-// (async () => {
-//     try {
-//        await mongoose.connect(mongoC.mongoDB.uri, mongoC.mongoDB.options);
-//     } catch (error) {
-//         console.log('No se pudo conectar a la base de datos')
-//     }
-
-    
-
-// })();
 
 
 const contactoMongo = new ContenedorMongo('contacts',{
@@ -44,10 +31,6 @@ router.get('/', async (req, res) => {
     
     const contacts = await contactoMongo.findAll();
     busqueda = contacts;
-    console.log('traigo contactos')
-    //console.log(contacts)
-    //res.render('index', { contacts })
-    //res.send(contacts)
     res.render('index')
    } catch (error) {
     
@@ -59,9 +42,6 @@ router.get('/all', async (req, res) => {
      
      const contacts = await contactoMongo.findAll();
      busqueda = contacts;
-     //console.log(contacts)
-     //res.render('index', { contacts })
-     //res.send(contacts)
      res.send(contacts)
     } catch (error) {
         res.send = {
@@ -75,11 +55,23 @@ router.get('/admin', async (req, res ) => {
     
     if(busqueda.length == 0 || sorteados == 0) {
         
-        
-        
         try {
             const query = await contactoMongo.findAll();
+            query.sort((a,b) => {
+                const apellidoA = a.lastname.toLowerCase();
+                const apellidoB = b.lastname.toLowerCase();
+
+                if (apellidoA < apellidoB) {
+                    return -1;
+                }
+                if( apellidoA > apellidoB ) {
+                    return 1
+                }
+                return 0;
+            });
+            
             const contacts = query.map((doc) => ({
+                id: doc._id,
                 firstname: doc.firstname,
                 lastname: doc.lastname,
             }));
@@ -91,9 +83,7 @@ router.get('/admin', async (req, res ) => {
                 firstname: doc.firstname,
                 lastname: doc.lastname
             }));
-
             sorteados = nuevaQuery;
-
             res.render('admin', {contacts, querySorteados})
         } catch (error) {
             throw new Error(error)
@@ -101,10 +91,25 @@ router.get('/admin', async (req, res ) => {
     } else {
         try {
             const query = await contactoMongo.findAll();
+
+            query.sort((a,b) => {
+                const apellidoA = a.lastname.toLowerCase();
+                const apellidoB = b.lastname.toLowerCase();
+
+                if (apellidoA < apellidoB) {
+                    return -1;
+                }
+                if( apellidoA > apellidoB ) {
+                    return 1
+                }
+                return 0;
+            });
+
             const contacts = query.map((doc) => ({
-            firstname: doc.firstname,
-            lastname: doc.lastname
-            }))
+                id: doc._id,
+                firstname: doc.firstname,
+                lastname: doc.lastname
+                }));
             busqueda = query;
             const nuevaQuery = await contenedorSorteados.findAllSorteados();
             const querySorteados = nuevaQuery.map((doc) => ({
@@ -112,7 +117,6 @@ router.get('/admin', async (req, res ) => {
                 lastname: doc.lastname
             }));
 
-            //console.log('en el else de admin', querySorteados)
             res.render('admin',{contacts, querySorteados})
         } catch (error) {
             console.log(error)
@@ -136,23 +140,11 @@ router.post('/sorteado', async(req, res) => {
                 email    : email, 
                 dni    : dni
             });
-
-        
             res.send('sorteado guardado')
     } catch (error) {
         console.log(error)
     }
     
-})
-router.delete('/delete-contact/:id', async(req, res) => {
-    const { id } = req.params;
-
-    try {
-        let data = await contactoMongo.deleteByDni(id)
-        res.send(data)
-    } catch (error) {
-        console.log(error)
-    }
 })
 
 router.post('/new-contact', async(req, res) => {
@@ -162,7 +154,7 @@ router.post('/new-contact', async(req, res) => {
             try {
                 const contacts = await contactoMongo.findAll();
                 busqueda = contacts;
-                console.log('busqueda antes de guardar', busqueda.length)
+                
                 let data = await contactoMongo.save(
                     {
                         firstname: firstname, 
@@ -173,7 +165,7 @@ router.post('/new-contact', async(req, res) => {
         
                     res.render('registrado', msg)
             } catch (error) {
-                
+                throw new Error(error)
             }
        
     } else {
@@ -182,8 +174,6 @@ router.post('/new-contact', async(req, res) => {
                 res.render('error');
             } else {
                 const found = await busqueda.find((element) => element.dni === dni)
-                
-                //console.log('dni',found)
                 if(!found) {
                     console.log('estoy aca')
                     let data = await contactoMongo.save(
@@ -193,34 +183,79 @@ router.post('/new-contact', async(req, res) => {
                             email    : email, 
                             dni    : dni
                         });
-            
-                       // console.log(data)
-            
-                        // if (typeof document !== 'undefined') {
-                        //     document.getElementById('loadform').reset();
-                           
-                        // } else {
-                        //     console.log('algo salio mal')
-                            
-                        //     console.log(firstname, lastname, email, dni)
-                        // }
                         res.render('registrado', msg)
                 } else {
                     res.render('duplicado')
                 }
-                
             }
-            
-            // res.send(data)
-            
         } catch (error) {
             throw new Error(error);
         }
-        
     }
-    
+})
+
+
+
+router.get('/edit-contact/:id', async(req, res) => {
+  const {id} = req.params;
+  let contador = 0;
+  
+  try {
+    const participante = await contactoMongo.findById(id) 
+    const contacts = participante.map((doc) => ({
+        id: doc.id,
+        firstname: doc.firstname,
+        lastname: doc.lastname,
+        email: doc.email,
+        dni: doc.dni
+    }));
+    //console.log(contacts)
+    console.log(contador++)
+    res.render('edit',{contacts})
+    //console.log(doc)
+  } catch (error) {
+    throw new Error(error)
+  }
    
 
+})
+
+router.post('/update-contact/:id', async (req, res) => {
+    const { id } = req.params;
+    const { firstname, lastname, email, dni } = req.body;
+    try {
+        let data = await contactoMongo.update({'id': id, 'firstname': firstname, 'lastname': lastname, 'email': email, 'dni':dni})
+        res.render('actualizado')
+    } catch (error) {
+        throw new Error(error)
+    }
+
+   
+})
+
+router.delete('/delete-participante/:id', async(req, res) => {
+    const { id } = req.params;
+
+    try {
+        let data = await contactoMongo.deleteByDni(id)
+        //res.send(data)
+        res.send('eliminado')
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+router.get('/delete-contact/:id', async(req, res) => {
+    const { id } = req.params;
+
+    try {
+        let data = await contactoMongo.deleteByDni(id)
+        //res.send(data)
+        res.render('eliminado')
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 

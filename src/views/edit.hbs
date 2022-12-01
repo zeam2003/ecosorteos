@@ -1,0 +1,86 @@
+
+    <!-- Section: Design Block -->
+    <section class="text-center">
+    
+      <!-- Background image -->
+      <div class="p-5 bg-image" style="
+            height:200px;">
+      </div>
+
+    <!-- Background image -->
+    <div class="card mx-4 mx-md-5 img-bkg">
+      <div class="card-body py-5 px-md-5">
+        <div class="container">
+        <div class="card">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card-header">
+                  <h1 class="fw-bold suerte">Editar Participante</h1>
+                </div>
+                <div class="card-body border-end border-secondary" style="--bs-border-opacity: .5;">
+                      {{#if contacts}}
+
+                      
+                      <div class="row d-flex justify-content-center">{{#each contacts}}
+                        <div class="col-lg-8">
+                         
+                          <form id="loadForm" action="/update-contact/{{id}}" method="POST" class="mt-5">
+                            <!-- 2 column grid layout with text inputs for the first and last names -->
+                            <div class="row">
+                              <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                  <input type="text" name="firstname" id="firstname" class="form-control" value="{{{firstname}}}"  placeholder="{{firstname}}" />
+                                  <label class="form-label" for="firstname">Nombre</label>
+                                </div>
+                              </div>
+                              <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                  <input type="text" name="lastname" id="lastname" class="form-control" value="{{{ lastname }}}" placeholder="{{lastname}}"/>
+                                  <label class="form-label" for="lastname">Apellido</label>
+                                </div>
+                              </div>
+                            </div>
+                
+                            <!-- Email input -->
+                            
+                            <div class="row">
+                              <div class="col-md-6 mb-4">
+                                <div class=" form-outline ">
+                                <input type="email" name="email" id="email" class="form-control" value="{{{email}}}"  placeholder="{{email}}" />
+                                <label class="form-label" for="email">Email</label>
+                            </div>
+                          </div>
+                
+                            <!-- Password input -->
+                            <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                              <input type="number" name="dni" id="dni" class="form-control" value="{{{dni}}}"  placeholder="{{dni}}"/>
+                              <label class="form-label" for="dni">DNI</label>
+                            </div>
+                          </div>
+                          </div>
+                
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-eco btn-primary btn-block mb-4 " >Actualizar</button>
+                
+                            <!-- Register buttons -->
+
+                          </form>
+                      {{/each}}
+                      {{else}}
+                      <p>No hay participantes</p>
+                      {{/if}}
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+           <a href="/admin" class="btn btn-primary mb-4">volver</a>
+        </div>
+        
+        
+        
+      </div>
+    </div>
+    </section>

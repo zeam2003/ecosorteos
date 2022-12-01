@@ -41,6 +41,19 @@ const  config  = require('../config.js');
         }
     }
 
+    async findById(id) {
+        
+        try {
+            const data = await this.db.find({_id: id})
+            if( data) {
+                return data;
+            }
+        } catch (error) {
+            throw new Error(error)
+        }
+       
+    }
+
     async findAll() {
         try {
           const data = await this.db.find({});
@@ -69,8 +82,14 @@ const  config  = require('../config.js');
         }
     }
 
-    update(elem) {
-
+   async update(elem) {
+        try {
+            console.log(elem)
+            await this.db.replaceOne({_id: elem.id }, elem);
+            return elem;
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
     async deleteByDni(id) {

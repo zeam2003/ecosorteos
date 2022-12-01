@@ -3,6 +3,7 @@ const app = express();
 const path  = require('path');
 //import { fileURLToPath } from 'url';
 const bodyParser  = require('body-parser');
+const cors = require('cors');
 const router = require('./routes/index.js');
 const handlebars  = require('express-handlebars');
 
@@ -26,8 +27,10 @@ app.set('view engine', '.hbs')
 
 
 app.use(express.json());
+app.use(cors({origin: true, credentials: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 
 

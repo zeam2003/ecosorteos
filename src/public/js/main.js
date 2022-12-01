@@ -8,8 +8,11 @@ window.addEventListener('load', function() {
     if (  document.getElementById('sorteador')  !== null){
        const precarga = document.getElementById('sorteador').addEventListener('click', sortear);
     } 
+
    
 })
+
+
 
 const sortear = async() => {
 
@@ -56,7 +59,8 @@ const sortear = async() => {
 }
 
 const borrarSorteado = async (id) => {
-    const response = await fetch(`http://localhost:8080/delete-contact/${id}`, {
+    console.log(id)
+    const response = await fetch(`http://localhost:8080/delete-participante/${id}`, {
         method: 'DELETE'
     })
     console.log(response)

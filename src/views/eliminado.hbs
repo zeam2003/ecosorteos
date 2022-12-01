@@ -1,0 +1,25 @@
+
+<section class="text-center">
+    
+      <!-- Background image -->
+      <div class="p-5 bg-image" style="
+            height:200px;">
+      </div>
+
+      <div class="card mx-4 mx-md-5 img-bkg">
+        <div class="card-body py-5 px-md-5">
+            <div class="container">
+                <div class="card">
+                    <div {{#if "cambio = 1"}} class="card-body">
+                        <h1 style="font-size: 25px;">Participante Eliminado</h1>
+                    </div>
+                    {{else}}
+                    <div>Ups!... Algo salió mal</div>
+                    {{/if}}
+                </div>
+                    
+                <a href="/admin" class="btn btn-eco btn-primary mt-2">volver</a>
+            </div>
+      </div>
+    </div>
+</section>
